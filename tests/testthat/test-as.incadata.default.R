@@ -1,0 +1,20 @@
+
+context("as.incadata.default")
+
+test_that("misc", {
+  expect_is(as.incadata(1:10),                  "integer")
+  expect_is(as.incadata(letters),               "character")
+  expect_is(as.incadata(as.factor(letters)),    "character")
+  expect_is(as.incadata(x_Beskrivning <- as.factor(letters)), "character")
+  expect_is(as.incadata(persnr <- "191212121212"), "pin")
+  expect_is(as.incadata(Sys.Date()),            "Date")
+  expect_is(as.incadata(c("19850504", "5806")), "Date")
+  expect_is(as.incadata("12,34"),               "numeric")
+  expect_is(as.incadata("a12,34"),              "character")
+  expect_is(as.incadata(c("12,34", "2.2")),     "numeric")
+  expect_is(as.incadata(c("True", "", NA)),     "logical")
+  expect_is(as.incadata(Sys.Date()),            "Date")
+  expect_is(as.incadata("01"),                  "character")
+  expect_is(as.incadata("1"),                   "integer")
+  expect_is(as.incadata(pi),                    "numeric")
+})
