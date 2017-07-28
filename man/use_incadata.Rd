@@ -9,16 +9,14 @@ use_incadata(file, cache = TRUE, sep = ";", dec = ",", ...)
 \arguments{
 \item{file}{file name as character (ignored if called from INCA)}
 
-\item{cache}{use cache to speed up the loading (see section: "cache_date"). 
-\code{TRUE} by default}
+\item{cache}{use cache to speed up the loading (see section: "Cache" below)}
 
 \item{sep, dec}{arguments passed to \code{\link{read.csv2}}}
 
 \item{...}{arguments passed to \code{\link{as.incadata}}.}
 }
 \value{
-An \code{incadata} object containing a representation of the data in
-the file (or \code{df}).
+object returned by \code{\link{as.incadata}}
 }
 \description{
 Read in a file (locally) or use global object named \code{df} (on INCA) 
@@ -32,7 +30,7 @@ and coerce to \code{incadata}-object.
   the data only the first time (or if the original data is later changed). A
   processed and cached version of the data is saved with suffix ".rds". The
   cached version is always compared to the original file by its MD5 sum and 
-  is updated if needed.
+  is always updated if needed.
 }
 
 \examples{

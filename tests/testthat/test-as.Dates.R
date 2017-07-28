@@ -19,7 +19,7 @@ test_that("simple input", {
 
 
 test_that("Mixed input", {
-  expect_equivalent(as.Dates(ds),
+  expect_equivalent(suppressWarnings(as.Dates(ds)),
     structure(c(-276508, 10957, 16358, -4345), class = "Date"))
   expect_warning(as.Dates(ds))
 })

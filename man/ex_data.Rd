@@ -3,14 +3,26 @@
 \docType{data}
 \name{ex_data}
 \alias{ex_data}
-\title{Example data from INCA}
-\format{A data frame with 497 rows and 433 variables}
+\title{Synthetic example data from INCA}
+\format{A data frame (not an object of class \code{incadata} 
+with 497 rows and 433
+  variables}
 \usage{
 ex_data
 }
 \description{
-Note that all data has been anonymised! There is no logical relation 
-between variables, hence \code{x_Beskrivning} and \code{x_Varde} 
-does not match.
+A data set resembling the typical form of INCA data. Variable names are real
+but all data has been carefully anonymised!
+}
+\details{
+All data is random! There is no logical relation between any
+variables, not even between \code{x_Beskrivning} and \code{x_Varde}!
+}
+\examples{
+# Inspect the data
+dplyr::glimpse(ex_data)
+
+# Coerce to incadata
+as.incadata(ex_data)
 }
 \keyword{datasets}

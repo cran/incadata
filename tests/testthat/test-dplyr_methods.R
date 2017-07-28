@@ -1,9 +1,11 @@
 context("dplyr methods")
 
 testdata <- 
-  incadata::as.incadata(
-    data.frame(
-      persnr = sweidnumbr::as.pin(c(198505043334, 191212121212, 192301011212))
+  suppressMessages(
+    incadata::as.incadata(
+      data.frame(
+        persnr = sweidnumbr::as.pin(c(198505043334, 191212121212, 192301011212))
+      )
     )
   )
 

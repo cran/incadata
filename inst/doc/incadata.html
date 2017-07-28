@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Erik Bulow" />
 
-<meta name="date" content="2017-02-14" />
+<meta name="date" content="2017-07-28" />
 
 <title>incadata</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">incadata</h1>
 <h4 class="author"><em>Erik Bulow</em></h4>
-<h4 class="date"><em>2017-02-14</em></h4>
+<h4 class="date"><em>2017-07-28</em></h4>
 
 
 
@@ -88,6 +88,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## The following object is masked from 'package:dplyr':
 ## 
 ##     id</code></pre>
+<pre><code>## The following object is masked from 'package:stats':
+## 
+##     filter</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(ex_data)</code></pre></div>
 <pre><code>## [1] 497 433</code></pre>
 <p>It’s a data set with many columns with all types of synthetic INCA-data (it is based on real INCA but everything is randomized and scrambled not to give any details about real patients, doctors, hospitals et cetera).</p>
@@ -398,16 +401,16 @@ fl &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="s
 ## * lkf_value_hemort2_beskrivning
 ## * lkf_value_lan_beskrivning</code></pre>
 <pre><code>## pat_id used as id!</code></pre>
-<pre><code>## Cache file saved: /var/folders/dd/z0l8zzy51jv48ywmfrv8yqt40000gp/T//Rtmp3wP9zK/ex_dataed720652cbd.csv2.rds</code></pre>
+<pre><code>## Cache file saved: /var/folders/dd/z0l8zzy51jv48ywmfrv8yqt40000gp/T//Rtmpmto6Gg/ex_data573530b795b0.csv2.rds</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.177   0.047   1.239</code></pre>
+##   1.172   0.012   1.187</code></pre>
 <p>Now, let’s assume that we for some reason has to restart the process all over again (and let´s time it again for the sake of comparison):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   x &lt;-<span class="st"> </span><span class="kw">use_incadata</span>(fl)
 )</code></pre></div>
-<pre><code>## Use cached file created 2017-02-14 13:34:50</code></pre>
+<pre><code>## Use cached file created 2017-07-28 14:39:37</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.038   0.008   0.045</code></pre>
+##   0.033   0.000   0.035</code></pre>
 <p>Voila! Data is already in a good format and process was therefore faster than before!</p>
 </div>
 </div>
@@ -423,7 +426,7 @@ fl &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="s
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

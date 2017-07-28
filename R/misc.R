@@ -2,6 +2,9 @@
 #' @export
 dplyr::`%>%`
 
+#' @import backports
+NULL
+
 #' @export
 print.incadata <- function(x, ...) {
   cat("# incadata\n")

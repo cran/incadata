@@ -14,7 +14,7 @@
 
 <meta name="date" content="2017-07-28" />
 
-<title>rccdates</title>
+<title>incadoc</title>
 
 
 
@@ -68,50 +68,117 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">rccdates</h1>
+<h1 class="title toc-ignore">incadoc</h1>
 <h4 class="author"><em>Erik Bulow</em></h4>
 <h4 class="date"><em>2017-07-28</em></h4>
 
 
 
-<div id="intro" class="section level1">
-<h1>Intro</h1>
-<p>Registers managed by the Swedish Cancer centers (quality registers and the cancer register) have date variables in different formats. This package can recognise and handle such dates.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(incadata)</code></pre></div>
+<div id="project-documentation-folder" class="section level1">
+<h1>Project documentation folder</h1>
+<p>A good way to work with INCA data is within an R project. The infra structure of such a project can either be specified manually or by using the <a href="http://projecttemplate.net/">ProjectTemplate</a> package. Either way, it might be a good idea to store project documentation within a sub folder called “doc”.</p>
 </div>
-<div id="ordinary-dates" class="section level1">
-<h1>Ordinary dates</h1>
-<p>RCC dates are usually in the form <code>%Y-%m-%d</code>, such as “2016-06-17”. These are recognised by ordinary R-functions such as <code>as.Date</code> if there are no missing values or if missing values are coded as NA. It is however common for RCC that missing dates are coded as empty strings. Then:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;2016-06-17&quot;</span>)
-<span class="kw">as.Date</span>(d)</code></pre></div>
-<pre><code>## Error in charToDate(x): character string is not in a standard unambiguous format</code></pre>
-<p>The <code>as.Dates</code> function (note the plural) might then be easier to use.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Dates</span>(d)</code></pre></div>
-<pre><code>## [1] NA           &quot;2016-06-17&quot;</code></pre>
+<div id="inca-documentation" class="section level1">
+<h1>INCA documentation</h1>
+<p>The function <code>documents</code> helps to create a project documentation folder (if it doesn’t already exist) and to populate it with relevant register documentation.</p>
+<p>If working on a Mac, the same function is used also to open such documents for immediate display (this works both if the document is already downloaded, or if it has to be downloaded first).</p>
 </div>
-<div id="non-standard-dates" class="section level1">
-<h1>Non standard dates</h1>
-<p>The oringinal motivation for the package was to handle old date variables from the cancer register. Days and even months are sometimes coded as “00” (unknown). If so happens, <code>as.Dates</code> (note the plural) might still recognise the date and will replace “00” by an approximate date:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2000-01-00&quot;</span>) <span class="co"># as.Date fails!</span></code></pre></div>
-<pre><code>## Error in charToDate(x): character string is not in a standard unambiguous format</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Dates</span>(<span class="st">&quot;2000-01-00&quot;</span>) <span class="co"># Missing day</span></code></pre></div>
-<pre><code>## [1] &quot;2000-01-15&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Dates</span>(<span class="st">&quot;2000-00-00&quot;</span>) <span class="co"># Missing month and day</span></code></pre></div>
-<pre><code>## [1] &quot;2000-07-01&quot;</code></pre>
-<p>Some old dates might also be in the format <code>%Y%V</code> (see <code>?strptime</code>), such as “7403” for week 3 in 1974. This is tricky for four reasons:</p>
-<ul>
-<li>Exact date is unknown but has to be approximated</li>
-<li>Different countries numerate weeks of year differently. Sweden use ISO-8601 (“If the week [starting on Monday] containing 1 January has four or more days in the new year, then it is considered week 1. Otherwise, it is the last week of the previous year, and the next week is week 1.”) but R does not.</li>
-<li>Procedures for week number differ also between different operating systems</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;7403&quot;</span>)</code></pre></div>
-<pre><code>## Error in charToDate(x): character string is not in a standard unambiguous format</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Dates</span>(<span class="st">&quot;7403&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;1974-01-17&quot;</code></pre>
-<p>It is also possible to have a mixture of different dates within the same vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Dates</span>(<span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;2000-01-01&quot;</span>, <span class="st">&quot;20000101&quot;</span>, <span class="st">&quot;20000000&quot;</span>, <span class="st">&quot;7403&quot;</span>))</code></pre></div>
-<pre><code>## [1] NA           NA           &quot;2000-01-01&quot; &quot;2000-01-01&quot; &quot;2000-07-01&quot;
-## [6] &quot;1974-01-17&quot;</code></pre>
+<div id="examples" class="section level1">
+<h1>Examples</h1>
+<p>Assume we work on a project related to lung cancer and that we want to download all register documentation related to the register.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;lung&quot;</span>)</code></pre></div>
+<pre><code>## 9 files downloaded to ./doc</code></pre>
+<p>Let’s say we are currently working with data from the the so called “registreringsblankett” and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the the document to have a look:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;lung&quot;</span>, <span class="st">&quot;registrering&quot;</span>)</code></pre></div>
+<p>We do not need to first download all documents but can also concentrate on the few we are interested in. Now assume that we are working with ALL and want to have a look at the “behandlingsblankett”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;all&quot;</span>, <span class="st">&quot;behandling&quot;</span>)</code></pre></div>
+<pre><code>## 1 files downloaded to ./doc</code></pre>
+</div>
+<div id="no-need-for-exact-names" class="section level1">
+<h1>No need for exact names</h1>
+<p>As probably guessed from above, it is not necessary to specify either the register or the documents in an exact way. If there is no match we will get an informative error with suggestions to use.</p>
+<p>If we are working wit ha register called something with “akut”, we can just try to find its variable list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;akut&quot;</span>, <span class="st">&quot;variabel&quot;</span>)</code></pre></div>
+<pre><code>## Error in find_register(x): Muliple diagnoses found. Choose one one:
+## * akut lymfatiskt leukemi all
+## * akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul</code></pre>
+<p>When we see the alternatives we might realize that we are actually looking for is “akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul”. This name if quite cumbersome to both remember and type, so let’s try with “AML” for short:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;AML&quot;</span>, <span class="st">&quot;variabel&quot;</span>)</code></pre></div>
+<pre><code>## 1 files downloaded to ./doc</code></pre>
+<p>That worked just fine!</p>
+<p>Let’s now assume that we are working with ovarial cancer and that we would like to see information regarding recidive:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;ovarial&quot;</span>, <span class="st">&quot;recidiv&quot;</span>)</code></pre></div>
+<pre><code>## Error in bmatch(urls$diagnos_clean, x): No match. Choose one of:
+##  * akut lymfatiskt leukemi all
+##  * akut myeloisk leukemi aml akut oklassificerad leukemi aul
+##  * kronisk lymfatisk leukemi kll
+##  * kronisk myeloisk leukemi kml
+##  * myelodysplastiskt syndrom mds
+##  * myeloproliferativa sjukdomar mpn
+##  * lymfom lymfkortelcancer
+##  * myelom
+##  * brost
+##  * bukspottkortel
+##  * gynekologi
+##  * hjarna
+##  * hud ogon
+##  * huvud hals
+##  * lever galla
+##  * lunga lungsack
+##  * matstrupe magsack
+##  * penis
+##  * prostata
+##  * sarkom
+##  * skoldkortel
+##  * testikel
+##  * tjock andtarm
+##  * anal
+##  * njurcancer
+##  * urinblase urinvagscancer
+##  * cancerlakemedel</code></pre>
+<p>It turns out that “ovarial” is not presented on its own but we might guess from the output that relevant documents could be found under “gynekologi”, so let’s try with that instead … or actually, let’s try the slightly altered “gyncancer” instead (just to show that the exact spelling is not important):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;gyncancer&quot;</span>, <span class="st">&quot;recidiv&quot;</span>)</code></pre></div>
+<pre><code>## 4 files downloaded to ./doc</code></pre>
+<p>Let’s stay at gynecological caner but assume that we would like all documents related to “corpus”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;gyncancer&quot;</span>, <span class="st">&quot;corpus&quot;</span>)</code></pre></div>
+<pre><code>## Error in bmatch(links$names, pattern): No match. Choose one of:
+##  * Styrdokumnet Svenska Kvalitetsregistret för Gynekologisk Cancer (pdf)
+##  * Användarhandbok för inrapportör i kvalitetsregister (pdf)
+##  * Registermanual livmoderkroppscancer (pdf)
+##  * Variabelförteckning livmoderkroppscancer (pdf)
+##  * Inklusionskriterier livmoderkroppscancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual livmoderhals- och vaginalcancer (pdf)
+##  * Variabelförteckning livmoderhals- och vaginalcancer (pdf)
+##  * Inklusionskriterier livmoderhals- och vaginalcancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual vulvacancer (pdf)
+##  * Variabelförteckning vulvacancer (pdf)
+##  * Inklusionskriterier vulvancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual äggstockscancer (pdf)
+##  * Variabelförteckning äggstockscancer (pdf)
+##  * Inklusionskriterier äggstockscancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kiurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)</code></pre>
+<p>Aha … the term used seems to be “livmoderkropp” (not “corpus”), so let’s try again:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">documents</span>(<span class="st">&quot;gyn&quot;</span>, <span class="st">&quot;livmoderkropp&quot;</span>)</code></pre></div>
+<pre><code>## 3 files downloaded to ./doc</code></pre>
 </div>
 
 

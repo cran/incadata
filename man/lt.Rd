@@ -4,13 +4,12 @@
 \alias{lt}
 \title{Lead time from one date to another}
 \usage{
-lt(from, to, neg.na = TRUE)
+lt(from, to, neg = FALSE)
 }
 \arguments{
-\item{from, to}{start and stop dates (in formats that can be coerced by
-\code{\link{as.Dates}}).}
+\item{from, to}{start and stop dates (in formats that can be recognised as RCC dates).}
 
-\item{neg.na}{should negative lead times be set to \code{NA}?}
+\item{neg}{except negative lead times (set to \code{NA} if \code{neg = FALSE})?}
 }
 \value{
 Numeric vector
@@ -19,5 +18,7 @@ Numeric vector
 Lead time from one date to another
 }
 \examples{
-lt(from = Sys.Date(), to = Sys.Date() + 10)
+lt("2017-02-10", "2017-02-16") # 6
+lt("2017-02-16", "2017-02-10") # negative lead times ignored by default
+lt("2017-02-16", "2017-02-10", TRUE) # -6
 }

@@ -1,16 +1,26 @@
 #' dplyr methods for INCA data
 #' 
-#' Verbs from the dplyr package can be used for incadata directly, but 
-#' the incadata object will then loose its class. 
-#' These methods will preserve the class.
+#' Verbs from the dplyr package can be used for incadata directly, but the
+#' incadata object will then loose its class. These methods will preserve the
+#' class.
 #' 
-#' @param .data,... arguments passed to original dplyr-methods
+#' These methods should not be used directly. They are just documented for
+#' clarification of underlying data structure.
+#' 
+#' @param .data,... arguments passed to dplyr-methods
+#' @return Object as return from corresponding dplyr functions but with
+#'   additional class attribute \code{incadata}.
+#'
+#' @examples 
+#' x <- dplyr::slice(as.incadata(incadata::ex_data), 1:10)
+#' class(x) # "incadata"   "tbl_df"     "tbl"        "data.frame"
 #' 
 #' @name dplyr_methods
 #' @keywords internal
 NULL
 
-# Function to create methods for generics
+
+#' Function to create methods for generics
 next_method <- function() {
   function(.data, ...) {
     x <- NextMethod()
@@ -19,30 +29,50 @@ next_method <- function() {
   }
 }
 
+#' @importFrom dplyr filter
+#' @export
+dplyr::filter
+
 #' @rdname dplyr_methods
 #' @export
-mutate_.incadata <- next_method()
+filter.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr mutate
 #' @export
-arrange_.incadata <- next_method()
+mutate.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr arrange
 #' @export
-filter_.incadata <- next_method()
+arrange.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr rename
 #' @export
-rename_.incadata <- next_method()
+rename.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr select
 #' @export
-select_.incadata <- next_method()
+select.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr slice
 #' @export
-slice_.incadata <- next_method()
+slice.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr summarise
 #' @export
-summarise_.incadata <- next_method()
+summarise.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr summarize
 #' @export
-summarize_.incadata <- next_method()
+summarize.incadata <- next_method()
+
 #' @rdname dplyr_methods
+#' @importFrom dplyr group_by
 #' @export
-group_by_.incadata <- next_method()
+group_by.incadata <- next_method()

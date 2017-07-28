@@ -1,0 +1,78 @@
+---
+title: "incadoc"
+author: "Erik Bulow"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{incadoc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = TRUE)
+```
+
+# Project documentation folder
+
+A good way to work with INCA data is within an R project. The infra structure of such a project can either be specified manually or by using the [ProjectTemplate](http://projecttemplate.net/) package. Either way, it might be a good idea to store project documentation within a sub folder called "doc".
+
+# INCA documentation
+
+The function `documents` helps to create a project documentation folder (if it doesn't already exist) and to populate it with relevant register documentation.
+
+If working on a Mac, the same function is used also to open such documents for immediate display (this works both if the document is already downloaded, or if it has to be downloaded first). 
+
+# Examples
+
+Assume we work on a project related to lung cancer and that we want to download all register documentation related to the register.
+```{r}
+documents("lung")
+```
+Let's say we are currently working with data from the the so called "registreringsblankett" and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the the document to have a look:
+```{r}
+documents("lung", "registrering")
+```
+
+We do not need to first download all documents but can also concentrate on the few we are interested in. Now assume that we are working with ALL and want to have a look at the "behandlingsblankett":
+
+```{r}
+documents("all", "behandling")
+```
+
+# No need for exact names
+
+As probably guessed from above, it is not necessary to specify either the register or the documents in an exact way. If there is no match we will get an informative error with suggestions to use. 
+
+If we are working wit ha register called something with "akut", we can just try to find its variable list:
+```{r, error = TRUE, purl = FALSE}
+documents("akut", "variabel")
+```
+When we see the alternatives we might realize that we are actually looking for is "akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul". This name if quite cumbersome to both remember and type, so let's try with "AML" for short:
+```{r}
+documents("AML", "variabel")
+```
+
+That worked just fine!
+
+Let's now assume that we are working with ovarial cancer and that we would like to see information regarding recidive:
+
+```{r, error = TRUE, purl = FALSE}
+documents("ovarial", "recidiv")
+```
+It turns out that "ovarial" is not presented on its own but we might guess from the output that relevant documents could be found under "gynekologi", so let's try with that instead ... or actually, let's try the slightly altered "gyncancer" instead (just to show that the exact spelling is not important):
+```{r}
+documents("gyncancer", "recidiv")
+```
+
+Let's stay at gynecological caner but assume that we would like all documents related to "corpus":
+```{r, error = TRUE, purl = FALSE}
+documents("gyncancer", "corpus")
+```
+
+Aha ... the term used seems to be "livmoderkropp" (not "corpus"), so let's try again:
+```{r}
+documents("gyn", "livmoderkropp")
+```
+

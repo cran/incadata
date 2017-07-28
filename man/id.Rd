@@ -7,9 +7,9 @@
 id(x, id = c("persnr", "pnr", "pat_id", "pn", "id"), ignore.case = TRUE)
 }
 \arguments{
-\item{x}{data.frame}
+\item{x}{data frame}
 
-\item{id}{names of possible id variable found in \code{x}}
+\item{id}{names of a possible id variable found in \code{x}}
 
 \item{ignore.case}{should name matching be done regardless of character case?}
 }
@@ -18,5 +18,5 @@ Character variable with either the first name from \code{id} found in
 \code{x} or \code{rownames(x)} if no named column found.
 }
 \description{
-Make sure that an incadata object has an id identifying the patient.
+Construct id variable for patient data.
 }

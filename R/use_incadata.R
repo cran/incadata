@@ -10,16 +10,14 @@
 #'   the data only the first time (or if the original data is later changed). A
 #'   processed and cached version of the data is saved with suffix ".rds". The
 #'   cached version is always compared to the original file by its MD5 sum and 
-#'   is updated if needed.
+#'   is always updated if needed.
 #'
 #' @param file file name as character (ignored if called from INCA)
-#' @param cache use cache to speed up the loading (see section: "cache_date"). 
-#'   \code{TRUE} by default
+#' @param cache use cache to speed up the loading (see section: "Cache" below)
 #' @param ... arguments passed to \code{\link{as.incadata}}.
 #' @param sep,dec arguments passed to \code{\link{read.csv2}}
 #' 
-#' @return An \code{incadata} object containing a representation of the data in
-#' the file (or \code{df}).
+#' @return object returned by \code{\link{as.incadata}} 
 #' 
 #' @export
 #' @examples 

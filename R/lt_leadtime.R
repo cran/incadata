@@ -1,14 +1,15 @@
 #' Lead time from one date to another
 #'
-#' @param from,to start and stop dates (in formats that can be coerced by
-#'   \code{\link{as.Dates}}).
-#' @param neg.na should negative lead times be set to \code{NA}?
+#' @param from,to start and stop dates (in formats that can be recognised as RCC dates).
+#' @param neg except negative lead times (set to \code{NA} if \code{neg = FALSE})?
 #' @return Numeric vector
 #' @export
 #' @examples
-#' lt(from = Sys.Date(), to = Sys.Date() + 10)
-lt <- function(from, to, neg.na = TRUE){
+#' lt("2017-02-10", "2017-02-16") # 6
+#' lt("2017-02-16", "2017-02-10") # negative lead times ignored by default
+#' lt("2017-02-16", "2017-02-10", TRUE) # -6
+lt <- function(from, to, neg = FALSE){
   x <- as.Dates(to) - as.Dates(from)
-  if (neg.na) x[x < 0] <- NA
+  if (!neg) x[x < 0] <- NA
   as.numeric(x)
 }

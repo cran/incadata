@@ -2,41 +2,54 @@
 % Please edit documentation in R/dplyr_methods.R
 \name{dplyr_methods}
 \alias{dplyr_methods}
-\alias{mutate_.incadata}
-\alias{arrange_.incadata}
-\alias{filter_.incadata}
-\alias{rename_.incadata}
-\alias{select_.incadata}
-\alias{slice_.incadata}
-\alias{summarise_.incadata}
-\alias{summarize_.incadata}
-\alias{group_by_.incadata}
+\alias{filter.incadata}
+\alias{mutate.incadata}
+\alias{arrange.incadata}
+\alias{rename.incadata}
+\alias{select.incadata}
+\alias{slice.incadata}
+\alias{summarise.incadata}
+\alias{summarize.incadata}
+\alias{group_by.incadata}
 \title{dplyr methods for INCA data}
 \usage{
-mutate_.incadata(.data, ...)
+\method{filter}{incadata}(.data, ...)
 
-arrange_.incadata(.data, ...)
+\method{mutate}{incadata}(.data, ...)
 
-filter_.incadata(.data, ...)
+\method{arrange}{incadata}(.data, ...)
 
-rename_.incadata(.data, ...)
+\method{rename}{incadata}(.data, ...)
 
-select_.incadata(.data, ...)
+\method{select}{incadata}(.data, ...)
 
-slice_.incadata(.data, ...)
+\method{slice}{incadata}(.data, ...)
 
-summarise_.incadata(.data, ...)
+\method{summarise}{incadata}(.data, ...)
 
-summarize_.incadata(.data, ...)
+\method{summarize}{incadata}(.data, ...)
 
-group_by_.incadata(.data, ...)
+\method{group_by}{incadata}(.data, ...)
 }
 \arguments{
-\item{.data, ...}{arguments passed to original dplyr-methods}
+\item{.data, ...}{arguments passed to dplyr-methods}
+}
+\value{
+Object as return from corresponding dplyr functions but with
+  additional class attribute \code{incadata}.
 }
 \description{
-Verbs from the dplyr package can be used for incadata directly, but 
-the incadata object will then loose its class. 
-These methods will preserve the class.
+Verbs from the dplyr package can be used for incadata directly, but the
+incadata object will then loose its class. These methods will preserve the
+class.
+}
+\details{
+These methods should not be used directly. They are just documented for
+clarification of underlying data structure.
+}
+\examples{
+x <- dplyr::slice(as.incadata(incadata::ex_data), 1:10)
+class(x) # "incadata"   "tbl_df"     "tbl"        "data.frame"
+
 }
 \keyword{internal}

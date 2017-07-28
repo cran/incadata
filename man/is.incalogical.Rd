@@ -10,7 +10,7 @@ is.incalogical(x)
 incalogical2logical(x)
 }
 \arguments{
-\item{x}{vector}
+\item{x}{vector (potentially logical)}
 }
 \value{
 \code{is.incalogical} returns \code{TRUE} if the vector 
@@ -19,17 +19,13 @@ is logical according to INCA:s internal rules, \code{FALSE} otherwise.
 can be coerced to such.
 }
 \description{
-It is common that check boxes are blanks by default but that this should 
-be interpreted as \code{TRUE}. There are however some uncommon cases
-were the boxes are instead marked with "False" if \code{FALSE}, 
-but otherwise left blank. 
-We can therefore not be certain of a blank value and will therefore treat 
-it as \code{NA}.
+Boolean vectors in INCA are stored internally as 0/1 and are changed to "True"/blank when exported. These functions identify such a variable as Boolean and can coerce it to such.
 }
 \details{
-Note that logical vectors in INCA will behave differently when used 
-internally in INCA. This is handled by the functions.
-or w
+It is common that check boxes are blanks by default but that this should 
+be interpreted as \code{TRUE}. There are however some uncommon cases
+were the boxes are marked with "False" for \code{FALSE}. 
+We can therefore not be certain of the meaning of a blank value. These will therefore be treated as \code{NA}.
 }
 \examples{
 is.incalogical(c("", "", "True", ""))  # TRUE
