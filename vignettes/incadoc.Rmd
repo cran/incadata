@@ -1,7 +1,7 @@
 ---
 title: "incadoc"
 author: "Erik Bulow"
-date: "`r Sys.Date()`"
+date: "2018-07-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{incadoc}
@@ -10,9 +10,7 @@ vignette: >
 ---
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = TRUE)
-```
+
 
 # Project documentation folder
 
@@ -27,18 +25,30 @@ If working on a Mac, the same function is used also to open such documents for i
 # Examples
 
 Assume we work on a project related to lung cancer and that we want to download all register documentation related to the register.
-```{r}
+
+```r
+suppressPackageStartupMessages(library(incadata))
 documents("lung")
 ```
+
+```
+## 11 files downloaded to ./doc
+```
 Let's say we are currently working with data from the the so called "registreringsblankett" and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the the document to have a look:
-```{r}
+
+```r
 documents("lung", "registrering")
 ```
 
 We do not need to first download all documents but can also concentrate on the few we are interested in. Now assume that we are working with ALL and want to have a look at the "behandlingsblankett":
 
-```{r}
+
+```r
 documents("all", "behandling")
+```
+
+```
+## 1 files downloaded to ./doc
 ```
 
 # No need for exact names
@@ -46,33 +56,133 @@ documents("all", "behandling")
 As probably guessed from above, it is not necessary to specify either the register or the documents in an exact way. If there is no match we will get an informative error with suggestions to use. 
 
 If we are working wit ha register called something with "akut", we can just try to find its variable list:
-```{r, error = TRUE, purl = FALSE}
+
+```r
 documents("akut", "variabel")
 ```
+
+```
+## Error in find_register(x): Muliple diagnoses found. Choose one one:
+## * akut lymfatiskt leukemi all
+## * akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul
+```
 When we see the alternatives we might realize that we are actually looking for is "akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul". This name if quite cumbersome to both remember and type, so let's try with "AML" for short:
-```{r}
+
+```r
 documents("AML", "variabel")
+```
+
+```
+## 1 files downloaded to ./doc
 ```
 
 That worked just fine!
 
 Let's now assume that we are working with ovarial cancer and that we would like to see information regarding recidive:
 
-```{r, error = TRUE, purl = FALSE}
+
+```r
 documents("ovarial", "recidiv")
 ```
+
+```
+## Error in bmatch(urls$diagnos_clean, x): No match. Choose one of:
+##  * akut lymfatiskt leukemi all
+##  * akut myeloisk leukemi aml akut oklassificerad leukemi aul
+##  * kronisk lymfatisk leukemi kll
+##  * kronisk myeloisk leukemi kml
+##  * myelodysplastiskt syndrom mds
+##  * myeloproliferativa sjukdomar mpn
+##  * lymfom lymfkortelcancer
+##  * myelom
+##  * brost
+##  * bukspottkortel
+##  * gynekologi
+##  * hjarna
+##  * hud ogon
+##  * huvud hals
+##  * lever galla
+##  * lunga lungsack
+##  * matstrupe magsack
+##  * penis
+##  * prostata
+##  * sarkom
+##  * skoldkortel
+##  * testikel
+##  * tjock andtarm
+##  * anal
+##  * njurcancer
+##  * urinblase urinvagscancer
+##  * cancerlakemedel
+```
 It turns out that "ovarial" is not presented on its own but we might guess from the output that relevant documents could be found under "gynekologi", so let's try with that instead ... or actually, let's try the slightly altered "gyncancer" instead (just to show that the exact spelling is not important):
-```{r}
+
+```r
 documents("gyncancer", "recidiv")
 ```
 
+```
+## 4 files downloaded to ./doc
+```
+
 Let's stay at gynecological caner but assume that we would like all documents related to "corpus":
-```{r, error = TRUE, purl = FALSE}
+
+```r
 documents("gyncancer", "corpus")
 ```
 
+```
+## Error in bmatch(links$names, pattern): No match. Choose one of:
+##  * Styrdokumnet Svenska Kvalitetsregistret för Gynekologisk Cancer (pdf)
+##  * Användarhandbok för inrapportör i kvalitetsregister (pdf)
+##  * Registermanual livmoderkroppscancer (pdf)
+##  * Variabelförteckning livmoderkroppscancer (pdf)
+##  * Inklusionskriterier livmoderkroppscancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual livmoderhals- och vaginalcancer (pdf)
+##  * Variabelförteckning livmoderhals- och vaginalcancer (pdf)
+##  * Inklusionskriterier livmoderhals- och vaginalcancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual vulvacancer (pdf)
+##  * Variabelförteckning vulvacancer (pdf)
+##  * Inklusionskriterier vulvancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual äggstockscancer (pdf)
+##  * Variabelförteckning äggstockscancer (pdf)
+##  * Inklusionskriterier äggstockscancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kiurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+```
+
 Aha ... the term used seems to be "livmoderkropp" (not "corpus"), so let's try again:
-```{r}
+
+```r
 documents("gyn", "livmoderkropp")
 ```
 
+```
+## 3 files downloaded to ./doc
+```
+
+# Cleaning
+
+For this vignette, we end by deleting all the downloaded files. 
+
+```r
+unlink("doc", TRUE)
+```

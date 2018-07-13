@@ -19,7 +19,7 @@ Not only are some formats strange (such as Boolean and dates), but sometimes the
 This vignette will use some example data `ex_data` found in the package:
 
 ```{r}
-suppressPackageStartupMessages(library(dplyr))
+# suppressPackageStartupMessages(library(dplyr))
 library(incadata)
 dim(ex_data)
 ```
@@ -31,7 +31,7 @@ Le's here chose a subset of columns just for illustrative purpose:
 ```{r}
 x <- 
   ex_data %>% 
-  select(
+  dplyr::select(
     a_lkf,
     a_inrappdatum,
     a_inrappsjh,
@@ -44,7 +44,7 @@ x <-
 Now, how are these variables stored?
 
 ```{r}
-glimpse(x)
+dplyr::glimpse(x)
 ```
 We can see that:
 
@@ -56,20 +56,22 @@ We can see that:
 We now want to change these formats to get something more natural.
 
 
-# Function as.incadata
+# Function `as.incadata`
 
 The package has two main functions and one of them is `as.incadata`. It can take either a single vector, or a data frame and it converts its input to a format more relevant for RCC data.
+
+The output message is quite verbose. This is intended since it is probably a good idea to check that all columns are coerced to reasonable formats. 
 
 ```{r}
 x2 <- as.incadata(x)
 ```
 
-The output message is quite verbose. This is intended since it is probably a good idea to check that all columns are coerced to reasonable formats. 
+
 
 Let's have a closer look at the result:
 
 ```{r}
-glimpse(x2)
+dplyr::glimpse(x2)
 ```
 
 Some things have happened:
@@ -86,7 +88,7 @@ Some things have happened:
 
 
 
-# Function use_incadata
+# Function `use_incadata`
 
 The other main function from the packe is `use_incadata`. It could be thought of as `read.incadata` but it is constructed to work also on INCA (where the data is already available in a data frame named "df" and therefore not read from disk).
 
@@ -108,14 +110,14 @@ write.csv2(incadata::ex_data, fl, row.names = FALSE)
 ```
 
 Let us now use the data for the "first time". The process will be verbose (but we omit it here just to save space). Here the cache file will be saved to our temporary directory since that's where we store our data. When working locally, the cache will be saved next to the original file (from where it can be copied or removed as a regular file). We also time the process to compare the speed with later attempt:
-```{r, warning=FALSE}
+```{r, warning=FALSE, message = FALSE}
 system.time(
   x <- use_incadata(fl)
 )
 ```
 
 Now, let's assume that we for some reason has to restart the process all over again (and let´s time it again for the sake of comparison):
-```{r}
+```{r, warning = FALSE, message = FALSE}
 system.time(
   x <- use_incadata(fl)
 )
@@ -124,5 +126,5 @@ Voila! Data is already in a good format and process was therefore faster than be
 
 # Additional functions
 
-Additional functions from the package are found by `help(package = "incadata")`.
+Additional functions from the package are found by `help(, "incadata")`.
 We do for example include som dplyr-verb wrappers just to maintain some attributes and to get pretty printing of objects. 

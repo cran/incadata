@@ -1,6 +1,6 @@
 #' Lead time from one date to another
 #'
-#' @param from,to start and stop dates (in formats that can be recognised as RCC dates).
+#' @param from,to start and stop dates (in formats that can be recognized as RCC dates).
 #' @param neg except negative lead times (set to \code{NA} if \code{neg = FALSE})?
 #' @return Numeric vector
 #' @export

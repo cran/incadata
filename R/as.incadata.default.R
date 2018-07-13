@@ -38,8 +38,9 @@ as.incadata.default <- function(x, n_i = NULL, ...) {
     } else if (grepl(special_names, tolower(n_i))) {
       x_chr
     # If whole vector missing, its difficult to know what to do.
-    # Boolean might be most logical but I do not want som many changes of vector 
-    # type just dependent on data missing or not, therefore chr might be good to
+    # Boolean might be most logical but I do not want som many changes 
+    # of vector type just dependent on data missing or not, 
+    # therefore chr might be good to
     } else if (all(is.na(x))) {
       x_chr
     } else if (is_Date(x_chr)) {

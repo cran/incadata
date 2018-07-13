@@ -2,12 +2,18 @@ Package: incadata
 Type: Package
 Title: Recognize and Handle Data in Formats Used by Swedish Cancer
         Centers
-Version: 0.6.1
-Author: Erik Bulow
-Maintainer: Erik Bulow <erik.bulow@rccvast.se>
+Version: 0.6.4
+Authors@R: 
+  c(
+    person("Erik", "Bulow", email = "erik.bulow@rccvast.se",
+      role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0002-9973-456X")
+    )
+  )
 Description: 
   Handle data in formats used by cancer centers in Sweden, both from 'INCA' 
-  (the current register platform, (see <http://www.incanet.se> for more information) and 
+  (the current register platform, (see <http://rcc.incanet.se> for more 
+  information) and 
   by the older register platform 'Rockan' (used in the Western and Northern part 
   of the country). 
   All variables are coerced to suitable classes based on their 
@@ -31,13 +37,15 @@ Description:
 License: GPL-2
 Depends: R (>= 2.10)
 Imports: backports, decoder, dplyr, rccmisc, rvest, sweidnumbr, xml2
-Suggests: testthat, knitr, rmarkdown
-RoxygenNote: 6.0.1.9000
-VignetteBuilder: knitr
+Suggests: testthat, knitr, rmarkdown, R.rsp
+VignetteBuilder: R.rsp
 URL: https://www.bitbucket.org/cancercentrum/incadata
 BugReports: https://www.bitbucket.org/cancercentrum/incadata/issues
 LazyData: true
+RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-07-28 12:39:59 UTC; erikbulow
+Packaged: 2018-07-13 09:09:17 UTC; erikbulow
+Author: Erik Bulow [aut, cre] (<https://orcid.org/0000-0002-9973-456X>)
+Maintainer: Erik Bulow <erik.bulow@rccvast.se>
 Repository: CRAN
-Date/Publication: 2017-07-28 12:46:05 UTC
+Date/Publication: 2018-07-13 09:30:03 UTC

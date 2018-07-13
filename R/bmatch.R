@@ -4,7 +4,7 @@
 bmatch <- function(x, pattern) {
   if (is.null(pattern)) return(rep(TRUE, length(x)))
   
-  # IN the URL:s thare are only lowcase, no "cancer" and no aao
+  # IN the URL:s there are only lowcase, no "cancer" and no aao
   pattern <- tolower(pattern)
   pattern <- gsub("cancer", "", pattern)
   pattern <- gsub("\u00E4|\u00E5", "a", pattern)

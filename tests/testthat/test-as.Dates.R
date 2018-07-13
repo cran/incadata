@@ -7,7 +7,7 @@ test_that("input unchanged",{
   expect_identical(as.Dates("kjhg"), as.Date(NA))
   expect_identical(as.Dates(123), as.Date(NA))
    expect_warning(as.Dates("12121212"),
-                 "year < 1830! Not realistic for RCC data!")
+                 "< 1830! Not realistic for RCC data!")
   expect_equal(as.Dates(NA), as.Date(NA))
 })
 

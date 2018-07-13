@@ -7,7 +7,7 @@
 lt(from, to, neg = FALSE)
 }
 \arguments{
-\item{from, to}{start and stop dates (in formats that can be recognised as RCC dates).}
+\item{from, to}{start and stop dates (in formats that can be recognized as RCC dates).}
 
 \item{neg}{except negative lead times (set to \code{NA} if \code{neg = FALSE})?}
 }

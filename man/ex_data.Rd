@@ -12,7 +12,7 @@ ex_data
 }
 \description{
 A data set resembling the typical form of INCA data. Variable names are real
-but all data has been carefully anonymised!
+but all data has been carefully anonymized!
 }
 \details{
 All data is random! There is no logical relation between any

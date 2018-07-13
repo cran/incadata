@@ -31,9 +31,10 @@ test_that("documents", {
   
   expect_message(
     documents("lunga", "uppfoljning", dir = tempdir(), max_open = 0),
-    "2 files downloaded to"
+    "1 files downloaded to"
   )
   expect_silent(
     documents("lunga", "uppfoljning", dir = tempdir(), max_open = 0))
   
 })
+

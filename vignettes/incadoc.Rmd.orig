@@ -28,6 +28,7 @@ If working on a Mac, the same function is used also to open such documents for i
 
 Assume we work on a project related to lung cancer and that we want to download all register documentation related to the register.
 ```{r}
+suppressPackageStartupMessages(library(incadata))
 documents("lung")
 ```
 Let's say we are currently working with data from the the so called "registreringsblankett" and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the the document to have a look:
@@ -76,3 +77,9 @@ Aha ... the term used seems to be "livmoderkropp" (not "corpus"), so let's try a
 documents("gyn", "livmoderkropp")
 ```
 
+# Cleaning
+
+For this vignette, we end by deleting all the downloaded files. 
+```{r}
+unlink("doc", TRUE)
+```
