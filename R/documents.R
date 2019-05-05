@@ -1,6 +1,7 @@
 #' Download and possibly open INCA documentation
 #'
-#' @inheritDotParams find_documents
+#' @inheritParams find_register
+#' @param doc (part of) document name to look for
 #' @param dir directory where to save files
 #' @param max_open maximum number of files to open automatically 
 #' (only on Mac OS X). Set to 0 to avoid any opening of files.
@@ -12,29 +13,34 @@
 #' \dontrun{
 #' documents("lunga", "uppfoljning")
 #' }
-documents <- function(..., dir = ".", max_open = 3) {
+documents <- function(reg, doc = NULL, dir = ".", max_open = 3) {
   
-  links    <- find_documents(...)
+  reg   <- find_register(reg)
+  links <- find_documents(reg, doc)
   
   # Remove special characters from file names
   dir <- file.path(dir, "doc")
-  links$new_names <- paste0(file.path(dir, gsub("/", "_", links$names)), ".pdf")
+  filename <- function(x) paste0(file.path(dir, gsub("/", "_", x)), ".pdf")
  
   # Download documents that do not already exist
   dir.create(dir, showWarnings = FALSE)
-  to_download <- !file.exists(links$new_name)
-  if (any(to_download)) {
-    apply(links[to_download, ], 1, 
-      function(x) utils::download.file(x[1], x[3], quiet = TRUE))
-    message(sum(to_download), " files downloaded to ", dir)
+  to_download <- links[!file.exists(filename(names(links)))]
+  if (length(to_download)) {
+    for (i in seq_along(to_download)) {
+      utils::download.file(to_download[i], 
+        filename(names(to_download[i])), quiet = TRUE)
+    }
+    message(i, " file(s) downloaded to ", dir)
   }
   
   # Open file from Mac if less than 3 and function called by user
-  if (nrow(links) <= max_open && 
+  if (length(links) <= max_open && 
       Sys.info()["sysname"] == "Darwin" && 
       interactive() && 
       identical(parent.frame(n = 1) , globalenv() )) {
-    . <- lapply(paste0("open '", links$new_names, "'"), system)
+    for (file in filename(names(links))) {
+      system(paste0("open '", file, "'"))
+    }
   }
 }
 

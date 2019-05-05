@@ -2,25 +2,24 @@
 % Please edit documentation in R/find_documents.R
 \name{find_documents}
 \alias{find_documents}
-\title{List all documents for a register}
+\title{List URLS to documents for a register}
 \usage{
-find_documents(x, pattern = NULL)
+find_documents(url, doc = NULL)
 }
 \arguments{
-\item{x}{name of register to look for}
+\item{url}{url to web page where to look for documents}
 
-\item{pattern}{part of document name to look for}
+\item{doc}{(part of) document name to look for}
 }
 \value{
-data frame with names of documents and corresponding URL:s for 
-specified register
+names character vector with urls to documents
 }
 \description{
-List all documents for a register
+List URLS to documents for a register
 }
 \examples{
 \dontrun{
-find_documents("all")
-find_documents("peniscancer", "uppfoljning")
+find_documents(find_register("all"))
+find_documents(find_register("peniscancer"), "uppfoljning")
 }
 }

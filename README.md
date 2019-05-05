@@ -1,70 +1,66 @@
+---
+output: github_document
+---
 
-[![Build
-status](https://ci.appveyor.com/api/projects/status/16otxht7x1aojrcy?svg=true)](https://ci.appveyor.com/project/eribul/incadata)
-[![Project Status: Active - The project has reached a stable, usable
-state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+
+
+[![Build status](https://ci.appveyor.com/api/projects/status/16otxht7x1aojrcy?svg=true)](https://ci.appveyor.com/project/eribul/incadata)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/incadata)](https://cran.r-project.org/package=incadata/)
-![Monthly downloads](http://cranlogs.r-pkg.org/badges/incadata) ![Total
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/incadata)
+![Monthly downloads](http://cranlogs.r-pkg.org/badges/incadata)
+![Total downloads](http://cranlogs.r-pkg.org/badges/grand-total/incadata)
 
-# incadata
 
-## Motivating example
+# incadata <img src = "https://bitbucket.org/cancercentrum/incadata/raw/master/man/figures/hexsticker.png" align = "right" width="175" height="200" />
 
-Some INCA formats are strange\!
+The goal of incadata is to provide basic functionality to handle data from INCA and the Regional cancer centers in Sweden. 
 
-1.  All of these are valid dates: `1985-05-04`, `""`, `19850504`,
-    `19850500` , `19850000`, `8513`
-2.  This is an INCA internal Boolean: `c(0, 1, 0, 1, 0, 0)`
-3.  This is an INCA exported Boolean: `c(NA, "True", NA, "True", NA,
-    NA)`
-4.  This is a valid personal identification number: `19470101000X` (note
-    the last “X”)
 
-The workflow of INCA today requires that you use a data frame “df”
-online but that you instead read in your data from disk offline. This
-force you to work either with different prescripts based on development
-stage, or to include an “if else”" clause identifying the current
-environment.
 
-To work with register data often require good knowledge about form
-structure and access to register documentation, which must be found
-online.
+## Installation
 
-## What can `incadata` do for you?
-
-The `incadata` package will recognize all peculiarities above and will
-coerce all formats into reasonable ones. It will also:
-
-  - Always use lower case names since these are generally easier to work
-    with
-  - Treat data frames as “tibbles” since these have some advantages over
-    regular data frames.
-  - Add an `id` column to data frames in order to always have an
-    identification variable at hand (regardless if the data has none or
-    one of PERSNR, PNR or PAT\_ID)
-  - Enhance the data with some automatically decoded variables (relying
-    on the decoder package)
-  - Let you cache your data sets between work sessions in on order to
-    speed up the data loading and munging process
-  - Let you use a single data reading/munging function regardless if you
-    work on INCA or locally
-  - The package also contains a mechanism for you to interactively
-    engage in the coercing process of variable formats. This is handy
-    for example if a variable is almost a date but has some additional
-    entries that are not recognised as such.
-  - Finally, there is also a mechanis for project documentation for easu
-    acces and storage of INCA register documentation (see vignette
-    “incadoc”).
-
-## Install
+You can install the released version of incadata from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# A stable version of the package can be installed from CRAN:
 install.packages("incadata")
+```
 
-# The lates development version can be installed from Bitbucket:
-Set argument `build_vignettes = TRUE` to also build the vignettes linked above
+And the development version from [BitBucket](https://bitbucket.org/) with:
+
+``` r
+# install.packages("devtools")
 devtools::install_bitbucket("cancercentrum/incadata")
 ```
+
+## Standardised data sets
+
+The function `as.incadata` standardize data from INCA and Rockan:
+
+* All date formats used by Rockan are recognized as dates and coerced to such (for example: `1985-05-04`, `""`, `19850504`, `19850500`
+, `19850000` and `8513`).
+* Booleans are numeric vectors in INCA: `c(0, 1, 0, 1, 0, 0)`, but coerced to character when exported: `c(NA, "True", NA, "True", NA, NA)`. The package recognise this 
+peculiarity and coerce to Boolean.
+* Personal identity numbers are recognised even if they end with "X" etcetera (used in Rockan).
+* Standard numerical codes from Rockan are decoded (using the [decoder](https://bitbucket.org/cancercentrum/decoder) package).
+* Column names are always coerced to lower case, since these are generally easier to work with.
+* Data frames are coerced to [tibbles](https://tibble.tidyverse.org/) .
+* An `id` column is always added to data frames in order to always have an identification variable at hand (regardless if the data has none or one of "PERSNR", "PNR" or "PAT_ID")
+
+
+## Register documentation
+
+The package also provides functionality for easier access and archiving of register documentation (se vignette "incadoc") and function `documents`.
+
+
+## Additional functionality
+
+The package also lets you ...
+
+* ... cache your data sets between work sessions in on order to speed up the data loading and munging process
+* ... use a single data reading/munging function regardless if you work on INCA or locally
+* ... interactively engage in the coercing process of variable formats. This is handy for example if a variable is almost a date but has some additional entries that are not recognised as such.
+
+
+# Code of conduct
+
+Please note that the 'incadata' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

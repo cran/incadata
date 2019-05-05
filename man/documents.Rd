@@ -4,14 +4,12 @@
 \alias{documents}
 \title{Download and possibly open INCA documentation}
 \usage{
-documents(..., dir = ".", max_open = 3)
+documents(reg, doc = NULL, dir = ".", max_open = 3)
 }
 \arguments{
-\item{...}{Arguments passed on to \code{find_documents}
-\describe{
-  \item{pattern}{part of document name to look for}
-  \item{x}{name of register to look for}
-}}
+\item{reg}{name of register to look for}
+
+\item{doc}{(part of) document name to look for}
 
 \item{dir}{directory where to save files}
 

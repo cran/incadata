@@ -19,13 +19,16 @@ is logical according to INCA:s internal rules, \code{FALSE} otherwise.
 can be coerced to such.
 }
 \description{
-Boolean vectors in INCA are stored internally as 0/1 and are changed to "True"/blank when exported. These functions identify such a variable as Boolean and can coerce it to such.
+Boolean vectors in INCA are stored internally as 0/1 and are changed to 
+"True"/blank when exported. These functions identify such a variable as 
+Boolean and can coerce it to such.
 }
 \details{
 It is common that check boxes are blanks by default but that this should 
 be interpreted as \code{TRUE}. There are however some uncommon cases
 were the boxes are marked with "False" for \code{FALSE}. 
-We can therefore not be certain of the meaning of a blank value. These will therefore be treated as \code{NA}.
+We can therefore not be certain of the meaning of a blank value. 
+These will therefore be treated as \code{NA}.
 }
 \examples{
 is.incalogical(c("", "", "True", ""))  # TRUE

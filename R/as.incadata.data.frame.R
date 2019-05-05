@@ -1,10 +1,11 @@
 #' @export
 #' @rdname as.incadata
-as.incadata.data.frame <- function(x, decode = TRUE, id = TRUE, ask = TRUE, ...) 
+as.incadata.data.frame <- 
+  function(x, decode = TRUE, id = TRUE, ask = TRUE, ...) 
 {
   
   ## Use lower case variable names
-  x <- rccmisc::lownames(x)
+  x <- lownames(x)
   
   ## Store original classes for later message
   oc <- vapply(x, function(x) class(x)[1], character(1))

@@ -17,7 +17,7 @@ as.incadata.default <- function(x, n_i = NULL, ...) {
     collapse = "|"
   )
   
-  as.chars <- function(x) rccmisc::specify_missing(trimws(as.character(x)))
+  as.chars <- function(x) specify_missing(trimws(as.character(x)))
   
   # A logical vector can only originate from tick marks. There is no potential 
   # for strange values there! We therefore do not need to use the usual 
@@ -57,5 +57,5 @@ as.incadata.default <- function(x, n_i = NULL, ...) {
     } 
     
   ## We now let the exceed_threshold function decides the output
-  suppressMessages(rccmisc::exceed_threshold(x, x_new, var_name = n_i, ...))
+  suppressMessages(exceed_threshold(x, x_new, var_name = n_i, ...))
 }

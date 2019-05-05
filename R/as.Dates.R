@@ -72,7 +72,7 @@ as.Dates <- function(x) {
   x <- as.Date(x, format = "%Y%m%d")
   
   # warn for years before 1830
-  if (inherits(x, "Date") && !all(is.na(x))) {
+  if (inherits(x, "Date") && !anyNA(x)) {
     tooearly <- x < as.Date("1830-01-01")
     if (any(tooearly, na.rm = TRUE))
       warning(

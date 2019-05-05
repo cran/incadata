@@ -4,7 +4,8 @@
 \alias{id}
 \title{Add id variables to data frame}
 \usage{
-id(x, id = c("persnr", "pnr", "pat_id", "pn", "id"), ignore.case = TRUE)
+id(x, id = c("persnr", "pnr", "pat_id", "pn", "id"),
+  ignore.case = TRUE)
 }
 \arguments{
 \item{x}{data frame}

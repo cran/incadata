@@ -46,7 +46,7 @@ use_incadata <-
   file.rds    <- paste0(file, ".rds")
   file_exists <- file.exists(file.rds)
 
-  if (rccmisc::is.inca()) { 
+  if (is.inca()) { 
     suppressMessages(as.incadata(get0("df", .GlobalEnv), ...))
   } else if (cache && file_exists && fresh(x <- readRDS(file.rds))) {
     message("Use cached file created ", attr(x, "cache_date"))

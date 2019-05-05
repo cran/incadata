@@ -6,11 +6,11 @@ bmatch <- function(x, pattern) {
   
   # IN the URL:s there are only lowcase, no "cancer" and no aao
   pattern <- tolower(pattern)
-  pattern <- gsub("cancer", "", pattern)
+  pattern <- gsub("cancer",        "",  pattern)
   pattern <- gsub("\u00E4|\u00E5", "a", pattern)
-  pattern <- gsub("\u00F6", "o", pattern)
+  pattern <- gsub("\u00F6",        "o", pattern)
   
-  ind <- 
+  mtch <- function(x, pattern) {
     if (any(equal <- x == pattern)) {
       equal
     } else if (any(exactb 
@@ -21,6 +21,12 @@ bmatch <- function(x, pattern) {
     } else if (any(approx <- agrepl(pattern, x))) {
       approx
     }
+  }
+  # Try first with unchanced x, and if that does not work with a standardised v
+  ind <- 
+    if (any(ind <- mtch(x, pattern))) {
+      ind
+    } else mtch(clean_text(x), pattern)
   
   # Stop if no match
   if (!any(ind)) {

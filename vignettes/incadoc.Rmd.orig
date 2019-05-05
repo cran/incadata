@@ -1,10 +1,10 @@
 ---
-title: "incadoc"
+title: "Easy access to register documentation"
 author: "Erik Bulow"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{incadoc}
+  %\VignetteIndexEntry{Easy access to register documentation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,41 +16,45 @@ knitr::opts_chunk$set(echo = TRUE, message = TRUE)
 
 # Project documentation folder
 
-A good way to work with INCA data is within an R project. The infra structure of such a project can either be specified manually or by using the [ProjectTemplate](http://projecttemplate.net/) package. Either way, it might be a good idea to store project documentation within a sub folder called "doc".
+It is recommended to organize R projects  using a common infrastructure (see for example [ProjectTemplate](http://projecttemplate.net/)). Project documenation might then be stored in a subfolder called "doc".
+
 
 # INCA documentation
 
 The function `documents` helps to create a project documentation folder (if it doesn't already exist) and to populate it with relevant register documentation.
 
-If working on a Mac, the same function is used also to open such documents for immediate display (this works both if the document is already downloaded, or if it has to be downloaded first). 
+If working on a Mac, the same function is used to open the documents for immediate display (this works both if the document is already downloaded, or if it has to be downloaded first). 
+
 
 # Examples
 
-Assume we work on a project related to lung cancer and that we want to download all register documentation related to the register.
+Assume we work on a lung cancer related project and therefore wants to download all register documentation for the Swedish lung cancer quality register.
+
 ```{r}
 suppressPackageStartupMessages(library(incadata))
 documents("lung")
 ```
-Let's say we are currently working with data from the the so called "registreringsblankett" and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the the document to have a look:
+
+Let's say we are currently working with data from the the so called "registreringsblankett" and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the document to have a look:
+
 ```{r}
 documents("lung", "registrering")
 ```
 
-We do not need to first download all documents but can also concentrate on the few we are interested in. Now assume that we are working with ALL and want to have a look at the "behandlingsblankett":
+We do not need to first download all the documents. It is possible to specify both the register and the document immidiately. Assume we are working with Acute lymphoblastic leukemia (ALL) and that we want to have a look at the "behandlingsblankett":
 
 ```{r}
 documents("all", "behandling")
 ```
 
+
 # No need for exact names
 
-As probably guessed from above, it is not necessary to specify either the register or the documents in an exact way. If there is no match we will get an informative error with suggestions to use. 
-
-If we are working wit ha register called something with "akut", we can just try to find its variable list:
+It is not necessary to specify the names excactly. If we are working with a register called something with "akut", we can just try to find its variable list:
 ```{r, error = TRUE, purl = FALSE}
 documents("akut", "variabel")
 ```
-When we see the alternatives we might realize that we are actually looking for is "akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul". This name if quite cumbersome to both remember and type, so let's try with "AML" for short:
+When we see the alternatives we might realize that we are actually looking for is "akut-myeloisk-leukemi-aml-inkl-akut-oklassificerad-leukemi-aul". This name is however quite cumbersome to both remember and type, so let's try with "AML" for short:
 ```{r}
 documents("AML", "variabel")
 ```
@@ -62,7 +66,9 @@ Let's now assume that we are working with ovarial cancer and that we would like 
 ```{r, error = TRUE, purl = FALSE}
 documents("ovarial", "recidiv")
 ```
+
 It turns out that "ovarial" is not presented on its own but we might guess from the output that relevant documents could be found under "gynekologi", so let's try with that instead ... or actually, let's try the slightly altered "gyncancer" instead (just to show that the exact spelling is not important):
+
 ```{r}
 documents("gyncancer", "recidiv")
 ```
@@ -77,9 +83,16 @@ Aha ... the term used seems to be "livmoderkropp" (not "corpus"), so let's try a
 documents("gyn", "livmoderkropp")
 ```
 
-# Cleaning
 
-For this vignette, we end by deleting all the downloaded files. 
-```{r}
+# Under the hood
+
+Documents are found with a two step proceedure.
+
+1. The list of quality registers is scraped from [cancercentrum.se](https://www.cancercentrum.se/samverkan/cancerdiagnoser/)
+2. Specific documents are found under the subfolder "/kvalitetsregister/dokument/" from each register.
+
+There are no hard coded URL:s within the package. The functtion should therefore work also for new registers or documents. If the over all structure of the web site is changed however, the package must be updated as well.
+
+```{r, include = FALSE}
 unlink("doc", TRUE)
 ```

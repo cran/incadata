@@ -4,19 +4,20 @@
 \alias{find_register}
 \title{Find register by name}
 \usage{
-find_register(x = NULL)
+find_register(reg = NULL)
 }
 \arguments{
-\item{x}{name of register to look for}
+\item{reg}{name of register to look for}
 }
 \value{
-Name of existing register according to <www.incanet.se>
+Named character vector with URL to specified register
 }
 \description{
-Find register by name
+The specified name does not need to be exact since a search algorithm is
+applied to match existing registers. Names of the registers
 }
 \examples{
-find_register("all") # "akut lymfatiskt leukemi all"
+find_register("all")
 \dontrun{
 find_register("kronisk") # More than one possible alternative
 }

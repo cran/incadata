@@ -15,20 +15,24 @@ id <- function(
   ignore.case = TRUE) {
   
   if (ignore.case) {
-    x  <- rccmisc::lownames(x)
+    x  <- lownames(x)
     id <- tolower(id)
   }
   
   # If there is exactly one pin vector, return its name (otherwise NULL)
   is_pin     <- vapply(x, sweidnumbr::is.pin, logical(1))
   pin        <- if (sum(is_pin) == 1) names(x)[is_pin]
-  ids        <- c(id, pin)
+  ids        <- unique(c(id, pin))
   
   # extract columns with names from ids (if any)
   candidates <- x[, ids[ids %in% names(x)], drop = FALSE]
 
   # Use first column with name matching id, otherwise row names
   y <- ncol(candidates)
+  if (y > 1) {
+    idnms <- paste(ids, collapse = ", ") 
+    warning("More than one possible id column: ", idnms)
+  }
   message(if (y) names(candidates)[1] else "rownames", " used as id!")
   if (y) candidates[[1]] else rownames(x)
 }

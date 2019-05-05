@@ -12,17 +12,17 @@
 
 <meta name="author" content="Erik Bulow" />
 
-<meta name="date" content="2018-07-13" />
+<meta name="date" content="2019-05-05" />
 
-<title>incadoc</title>
+<title>Easy access to register documentation</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -35,13 +35,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -83,7 +81,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -271,6 +291,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -278,123 +301,65 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 
-<h1 class="title toc-ignore">incadoc</h1>
-<h4 class="author"><em>Erik Bulow</em></h4>
-<h4 class="date"><em>2018-07-13</em></h4>
+<h1 class="title toc-ignore">Easy access to register documentation</h1>
+<h4 class="author">Erik Bulow</h4>
+<h4 class="date">2019-05-05</h4>
 
 
 
 <div id="project-documentation-folder" class="section level1">
 <h1>Project documentation folder</h1>
-<p>A good way to work with INCA data is within an R project. The infra structure of such a project can either be specified manually or by using the <a href="http://projecttemplate.net/">ProjectTemplate</a> package. Either way, it might be a good idea to store project documentation within a sub folder called “doc”.</p>
+<p>It is recommended to organize R projects using a common infrastructure (see for example <a href="http://projecttemplate.net/">ProjectTemplate</a>). Project documenation might then be stored in a subfolder called “doc”.</p>
 </div>
 <div id="inca-documentation" class="section level1">
 <h1>INCA documentation</h1>
 <p>The function <code>documents</code> helps to create a project documentation folder (if it doesn’t already exist) and to populate it with relevant register documentation.</p>
-<p>If working on a Mac, the same function is used also to open such documents for immediate display (this works both if the document is already downloaded, or if it has to be downloaded first).</p>
+<p>If working on a Mac, the same function is used to open the documents for immediate display (this works both if the document is already downloaded, or if it has to be downloaded first).</p>
 </div>
 <div id="examples" class="section level1">
 <h1>Examples</h1>
-<p>Assume we work on a project related to lung cancer and that we want to download all register documentation related to the register.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(incadata))</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">documents</span>(<span class="st">&quot;lung&quot;</span>)</a></code></pre></div>
-<pre><code>## 11 files downloaded to ./doc</code></pre>
-<p>Let’s say we are currently working with data from the the so called “registreringsblankett” and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the the document to have a look:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;lung&quot;</span>, <span class="st">&quot;registrering&quot;</span>)</a></code></pre></div>
-<p>We do not need to first download all documents but can also concentrate on the few we are interested in. Now assume that we are working with ALL and want to have a look at the “behandlingsblankett”:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;all&quot;</span>, <span class="st">&quot;behandling&quot;</span>)</a></code></pre></div>
-<pre><code>## 1 files downloaded to ./doc</code></pre>
+<p>Assume we work on a lung cancer related project and therefore wants to download all register documentation for the Swedish lung cancer quality register.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(incadata))</a></code></pre></div>
+<pre><code>## Error in library(incadata): there is no package called 'incadata'</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;lung&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;lung&quot;): could not find function &quot;documents&quot;</code></pre>
+<p>Let’s say we are currently working with data from the the so called “registreringsblankett” and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the document to have a look:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;lung&quot;</span>, <span class="st">&quot;registrering&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;lung&quot;, &quot;registrering&quot;): could not find function &quot;documents&quot;</code></pre>
+<p>We do not need to first download all the documents. It is possible to specify both the register and the document immidiately. Assume we are working with Acute lymphoblastic leukemia (ALL) and that we want to have a look at the “behandlingsblankett”:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;all&quot;</span>, <span class="st">&quot;behandling&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;all&quot;, &quot;behandling&quot;): could not find function &quot;documents&quot;</code></pre>
 </div>
 <div id="no-need-for-exact-names" class="section level1">
 <h1>No need for exact names</h1>
-<p>As probably guessed from above, it is not necessary to specify either the register or the documents in an exact way. If there is no match we will get an informative error with suggestions to use.</p>
-<p>If we are working wit ha register called something with “akut”, we can just try to find its variable list:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;akut&quot;</span>, <span class="st">&quot;variabel&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in find_register(x): Muliple diagnoses found. Choose one one:
-## * akut lymfatiskt leukemi all
-## * akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul</code></pre>
-<p>When we see the alternatives we might realize that we are actually looking for is “akut myeloisk leukemi aml inkl akut oklassificerad leukemi aul”. This name if quite cumbersome to both remember and type, so let’s try with “AML” for short:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;AML&quot;</span>, <span class="st">&quot;variabel&quot;</span>)</a></code></pre></div>
-<pre><code>## 1 files downloaded to ./doc</code></pre>
+<p>It is not necessary to specify the names excactly. If we are working with a register called something with “akut”, we can just try to find its variable list:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;akut&quot;</span>, <span class="st">&quot;variabel&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;akut&quot;, &quot;variabel&quot;): could not find function &quot;documents&quot;</code></pre>
+<p>When we see the alternatives we might realize that we are actually looking for is “akut-myeloisk-leukemi-aml-inkl-akut-oklassificerad-leukemi-aul”. This name is however quite cumbersome to both remember and type, so let’s try with “AML” for short:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;AML&quot;</span>, <span class="st">&quot;variabel&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;AML&quot;, &quot;variabel&quot;): could not find function &quot;documents&quot;</code></pre>
 <p>That worked just fine!</p>
 <p>Let’s now assume that we are working with ovarial cancer and that we would like to see information regarding recidive:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;ovarial&quot;</span>, <span class="st">&quot;recidiv&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in bmatch(urls$diagnos_clean, x): No match. Choose one of:
-##  * akut lymfatiskt leukemi all
-##  * akut myeloisk leukemi aml akut oklassificerad leukemi aul
-##  * kronisk lymfatisk leukemi kll
-##  * kronisk myeloisk leukemi kml
-##  * myelodysplastiskt syndrom mds
-##  * myeloproliferativa sjukdomar mpn
-##  * lymfom lymfkortelcancer
-##  * myelom
-##  * brost
-##  * bukspottkortel
-##  * gynekologi
-##  * hjarna
-##  * hud ogon
-##  * huvud hals
-##  * lever galla
-##  * lunga lungsack
-##  * matstrupe magsack
-##  * penis
-##  * prostata
-##  * sarkom
-##  * skoldkortel
-##  * testikel
-##  * tjock andtarm
-##  * anal
-##  * njurcancer
-##  * urinblase urinvagscancer
-##  * cancerlakemedel</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;ovarial&quot;</span>, <span class="st">&quot;recidiv&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;ovarial&quot;, &quot;recidiv&quot;): could not find function &quot;documents&quot;</code></pre>
 <p>It turns out that “ovarial” is not presented on its own but we might guess from the output that relevant documents could be found under “gynekologi”, so let’s try with that instead … or actually, let’s try the slightly altered “gyncancer” instead (just to show that the exact spelling is not important):</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;gyncancer&quot;</span>, <span class="st">&quot;recidiv&quot;</span>)</a></code></pre></div>
-<pre><code>## 4 files downloaded to ./doc</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;gyncancer&quot;</span>, <span class="st">&quot;recidiv&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;gyncancer&quot;, &quot;recidiv&quot;): could not find function &quot;documents&quot;</code></pre>
 <p>Let’s stay at gynecological caner but assume that we would like all documents related to “corpus”:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;gyncancer&quot;</span>, <span class="st">&quot;corpus&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in bmatch(links$names, pattern): No match. Choose one of:
-##  * Styrdokumnet Svenska Kvalitetsregistret för Gynekologisk Cancer (pdf)
-##  * Användarhandbok för inrapportör i kvalitetsregister (pdf)
-##  * Registermanual livmoderkroppscancer (pdf)
-##  * Variabelförteckning livmoderkroppscancer (pdf)
-##  * Inklusionskriterier livmoderkroppscancer (pdf)
-##  * Anmälan (pdf)
-##  * Kirurgisk behandling (pdf)
-##  * Avslutad primärbehandling (pdf)
-##  * Icke-kirurgisk recidivbehandling (pdf)
-##  * Uppföljning (pdf)
-##  * Registermanual livmoderhals- och vaginalcancer (pdf)
-##  * Variabelförteckning livmoderhals- och vaginalcancer (pdf)
-##  * Inklusionskriterier livmoderhals- och vaginalcancer (pdf)
-##  * Anmälan (pdf)
-##  * Kirurgisk behandling (pdf)
-##  * Avslutad primärbehandling (pdf)
-##  * Icke-kirurgisk recidivbehandling (pdf)
-##  * Uppföljning (pdf)
-##  * Registermanual vulvacancer (pdf)
-##  * Variabelförteckning vulvacancer (pdf)
-##  * Inklusionskriterier vulvancer (pdf)
-##  * Anmälan (pdf)
-##  * Kirurgisk behandling (pdf)
-##  * Avslutad primärbehandling (pdf)
-##  * Icke-kirurgisk recidivbehandling (pdf)
-##  * Uppföljning (pdf)
-##  * Registermanual äggstockscancer (pdf)
-##  * Variabelförteckning äggstockscancer (pdf)
-##  * Inklusionskriterier äggstockscancer (pdf)
-##  * Anmälan (pdf)
-##  * Kirurgisk behandling (pdf)
-##  * Avslutad primärbehandling (pdf)
-##  * Icke-kiurgisk recidivbehandling (pdf)
-##  * Uppföljning (pdf)</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;gyncancer&quot;</span>, <span class="st">&quot;corpus&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;gyncancer&quot;, &quot;corpus&quot;): could not find function &quot;documents&quot;</code></pre>
 <p>Aha … the term used seems to be “livmoderkropp” (not “corpus”), so let’s try again:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;gyn&quot;</span>, <span class="st">&quot;livmoderkropp&quot;</span>)</a></code></pre></div>
-<pre><code>## 3 files downloaded to ./doc</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">documents</span>(<span class="st">&quot;gyn&quot;</span>, <span class="st">&quot;livmoderkropp&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in documents(&quot;gyn&quot;, &quot;livmoderkropp&quot;): could not find function &quot;documents&quot;</code></pre>
 </div>
-<div id="cleaning" class="section level1">
-<h1>Cleaning</h1>
-<p>For this vignette, we end by deleting all the downloaded files.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">unlink</span>(<span class="st">&quot;doc&quot;</span>, <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="under-the-hood" class="section level1">
+<h1>Under the hood</h1>
+<p>Documents are found with a two step proceedure.</p>
+<ol style="list-style-type: decimal">
+<li>The list of quality registers is scraped from <a href="https://www.cancercentrum.se/samverkan/cancerdiagnoser/">cancercentrum.se</a></li>
+<li>Specific documents are found under the subfolder “/kvalitetsregister/dokument/” from each register.</li>
+</ol>
+<p>There are no hard coded URL:s within the package. The functtion should therefore work also for new registers or documents. If the over all structure of the web site is changed however, the package must be updated as well.</p>
 </div>
 
 

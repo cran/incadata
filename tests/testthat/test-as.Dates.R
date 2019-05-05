@@ -28,3 +28,6 @@ test_that("SKAPAD_DATUM", {
   expect_is(as.Dates("2016-04-06 10:01:22.780"), "Date")
 })
 
+test_that("Future data", {
+  expect_warning(as.Dates(as.character(Sys.Date() + 1)))
+})

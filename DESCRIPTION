@@ -2,7 +2,7 @@ Package: incadata
 Type: Package
 Title: Recognize and Handle Data in Formats Used by Swedish Cancer
         Centers
-Version: 0.6.4
+Version: 0.8.2
 Authors@R: 
   c(
     person("Erik", "Bulow", email = "erik.bulow@rccvast.se",
@@ -12,12 +12,8 @@ Authors@R:
   )
 Description: 
   Handle data in formats used by cancer centers in Sweden, both from 'INCA' 
-  (the current register platform, (see <http://rcc.incanet.se> for more 
-  information) and 
-  by the older register platform 'Rockan' (used in the Western and Northern part 
-  of the country). 
-  All variables are coerced to suitable classes based on their 
-  format. 
+  (<https://rcc.incanet.se>) and by the older register platform 'Rockan'.
+  All variables are coerced to suitable classes based on their format. 
   Dates (from various formats such as with missing month or day, with or 
   without century prefix or with just a week number) are all recognized as
   dates and coerced to the ISO 8601 standard (Y-m-d).
@@ -32,20 +28,23 @@ Description:
   It also contain a caching mechanism in order to temporarily store data sets 
   with its newly decided formats in order to not rerun the identification 
   process each time. 
-  And finally, it also include a mechanism to aid the documentation process 
+  The package also include a mechanism to aid the documentation process 
   connected to projects build on data from 'INCA'.
+  From version 0.7, some general help functions are also included, 
+  as previously found in the 'rccmisc' package.
 License: GPL-2
 Depends: R (>= 2.10)
-Imports: backports, decoder, dplyr, rccmisc, rvest, sweidnumbr, xml2
+Imports: backports, decoder, dplyr, rvest, sweidnumbr, xml2
 Suggests: testthat, knitr, rmarkdown, R.rsp
 VignetteBuilder: R.rsp
-URL: https://www.bitbucket.org/cancercentrum/incadata
+URL: https://cancercentrum.bitbucket.io/incadata
 BugReports: https://www.bitbucket.org/cancercentrum/incadata/issues
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-07-13 09:09:17 UTC; erikbulow
+Packaged: 2019-05-05 20:07:34 UTC; erikbulow
 Author: Erik Bulow [aut, cre] (<https://orcid.org/0000-0002-9973-456X>)
 Maintainer: Erik Bulow <erik.bulow@rccvast.se>
 Repository: CRAN
-Date/Publication: 2018-07-13 09:30:03 UTC
+Date/Publication: 2019-05-05 20:30:04 UTC

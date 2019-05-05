@@ -29,6 +29,8 @@ next_method <- function() {
   }
 }
 
+# Hate this but is necessary for checks to find correct filter-function 
+# (otherwise take it from stats, which has no S3 methods):-(
 #' @importFrom dplyr filter
 #' @export
 dplyr::filter
@@ -36,7 +38,7 @@ dplyr::filter
 #' @rdname dplyr_methods
 #' @export
 filter.incadata <- next_method()
-
+  
 #' @rdname dplyr_methods
 #' @importFrom dplyr mutate
 #' @export
