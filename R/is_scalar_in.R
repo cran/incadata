@@ -3,7 +3,7 @@
 #' 
 #' @param x R object to be tested, most likely a numeric vector of length one 
 #' (other formats are allowed but will always return \code{FALSE}).
-#' @param left,right arguments passed to \code{\link[dplyr]{between}}
+#' @param left,right lower and upper bound
 #' @return
 #' \code{is.scalar_in01} returns \code{TRUE} if \code{x} is an atomic vector of 
 #' length one and \code{0 <= as_numeric(x) <= 1}.

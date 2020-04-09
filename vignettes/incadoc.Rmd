@@ -1,7 +1,7 @@
 ---
 title: "Easy access to register documentation"
 author: "Erik Bulow"
-date: "2019-05-05"
+date: "2020-04-09"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Easy access to register documentation}
@@ -30,19 +30,12 @@ Assume we work on a lung cancer related project and therefore wants to download 
 
 
 ```r
-suppressPackageStartupMessages(library(incadata))
-```
-
-```
-## Error in library(incadata): there is no package called 'incadata'
-```
-
-```r
+library(incadata)
 documents("lung")
 ```
 
 ```
-## Error in documents("lung"): could not find function "documents"
+## 13 file(s) downloaded to ./doc
 ```
 
 Let's say we are currently working with data from the the so called "registreringsblankett" and we suddenly feel the need to check the logical order of questions appearing on the form. Now, if we are working on a Mac, we can easily open the document to have a look:
@@ -50,10 +43,6 @@ Let's say we are currently working with data from the the so called "registrerin
 
 ```r
 documents("lung", "registrering")
-```
-
-```
-## Error in documents("lung", "registrering"): could not find function "documents"
 ```
 
 We do not need to first download all the documents. It is possible to specify both the register and the document immidiately. Assume we are working with Acute lymphoblastic leukemia (ALL) and that we want to have a look at the "behandlingsblankett":
@@ -64,7 +53,7 @@ documents("all", "behandling")
 ```
 
 ```
-## Error in documents("all", "behandling"): could not find function "documents"
+## 1 file(s) downloaded to ./doc
 ```
 
 
@@ -77,7 +66,9 @@ documents("akut", "variabel")
 ```
 
 ```
-## Error in documents("akut", "variabel"): could not find function "documents"
+## Error in find_register(reg): Muliple diagnoses found. Choose one one:
+## * akut-lymfatiskt-leukemi-all
+## * akut-myeloisk-leukemi-aml-inkl-akut-oklassificerad-leukemi-aul
 ```
 When we see the alternatives we might realize that we are actually looking for is "akut-myeloisk-leukemi-aml-inkl-akut-oklassificerad-leukemi-aul". This name is however quite cumbersome to both remember and type, so let's try with "AML" for short:
 
@@ -86,7 +77,7 @@ documents("AML", "variabel")
 ```
 
 ```
-## Error in documents("AML", "variabel"): could not find function "documents"
+## 1 file(s) downloaded to ./doc
 ```
 
 That worked just fine!
@@ -99,7 +90,34 @@ documents("ovarial", "recidiv")
 ```
 
 ```
-## Error in documents("ovarial", "recidiv"): could not find function "documents"
+## Error in bmatch(names(links), reg): No match. Choose one of:
+##  * akut-lymfatiskt-leukemi-all
+##  * akut-myeloisk-leukemi-aml-inkl-akut-oklassificerad-leukemi-aul
+##  * kronisk-lymfatisk-leukemi-kll
+##  * kronisk-myeloisk-leukemi-kml
+##  * myelodysplastiskt-syndrom-mds
+##  * myeloproliferativa-sjukdomar-mpn
+##  * lymfom-lymfkortelcancer
+##  * myelom
+##  * brost
+##  * bukspottkortel
+##  * gynekologi
+##  * hjarna-och-ryggmarg
+##  * hud-och-ogon
+##  * huvud-och-hals
+##  * lever-och-galla
+##  * lunga-och-lungsack
+##  * matstrupe-och-magsack
+##  * neuroendokrina-buktumorer
+##  * njure
+##  * penis
+##  * prostata
+##  * sarkom
+##  * skoldkortel
+##  * testikel
+##  * anal
+##  * tjock--och-andtarm
+##  * urinblasa-urinvagar
 ```
 
 It turns out that "ovarial" is not presented on its own but we might guess from the output that relevant documents could be found under "gynekologi", so let's try with that instead ... or actually, let's try the slightly altered "gyncancer" instead (just to show that the exact spelling is not important):
@@ -110,7 +128,7 @@ documents("gyncancer", "recidiv")
 ```
 
 ```
-## Error in documents("gyncancer", "recidiv"): could not find function "documents"
+## 4 file(s) downloaded to ./doc
 ```
 
 Let's stay at gynecological caner but assume that we would like all documents related to "corpus":
@@ -120,7 +138,44 @@ documents("gyncancer", "corpus")
 ```
 
 ```
-## Error in documents("gyncancer", "corpus"): could not find function "documents"
+## Error in bmatch(names(links), doc): No match. Choose one of:
+##  * Styrdokumnet Svenska Kvalitetsregistret för Gynekologisk Cancer (pdf)
+##  * Användarhandbok för inrapportör i kvalitetsregister (pdf)
+##  * Årshjul Svenska Kvalitetsregistret för Gynekologisk Cancer nov 2019 - okt 2020 (pdf, nytt fönster)
+##  * Instruktioner för registrering - Svenska kvalitetsregistret för gynekologisk cancer (pdf, nytt fönster)
+##  * Inklusionskriterier livmoderkroppscancer (pdf)
+##  * Uppföljning (pdf, nytt fönster)
+##  * Registermanual livmoderkroppscancer (pdf)
+##  * Variabelförteckning livmoderkroppscancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual livmoderhals- och vaginalcancer (pdf)
+##  * Variabelförteckning livmoderhals- och vaginalcancer (pdf)
+##  * Inklusionskriterier livmoderhals- och vaginalcancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual vulvacancer (pdf)
+##  * Variabelförteckning vulvacancer (pdf)
+##  * Inklusionskriterier vulvancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kirurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
+##  * Registermanual äggstockscancer (pdf)
+##  * Variabelförteckning äggstockscancer (pdf)
+##  * Inklusionskriterier äggstockscancer (pdf)
+##  * Anmälan (pdf)
+##  * Kirurgisk behandling (pdf)
+##  * Avslutad primärbehandling (pdf)
+##  * Icke-kiurgisk recidivbehandling (pdf)
+##  * Uppföljning (pdf)
 ```
 
 Aha ... the term used seems to be "livmoderkropp" (not "corpus"), so let's try again:
@@ -130,7 +185,7 @@ documents("gyn", "livmoderkropp")
 ```
 
 ```
-## Error in documents("gyn", "livmoderkropp"): could not find function "documents"
+## 3 file(s) downloaded to ./doc
 ```
 
 

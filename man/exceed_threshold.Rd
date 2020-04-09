@@ -4,8 +4,14 @@
 \alias{exceed_threshold}
 \title{Check if transformation/coercing of a vector is good enough}
 \usage{
-exceed_threshold(original, transformed, threshold = 0.9, force = FALSE,
-  ask = FALSE, var_name = "the input vector")
+exceed_threshold(
+  original,
+  transformed,
+  threshold = 0.9,
+  force = FALSE,
+  ask = FALSE,
+  var_name = "the input vector"
+)
 }
 \arguments{
 \item{original}{the original vector}
@@ -14,13 +20,13 @@ exceed_threshold(original, transformed, threshold = 0.9, force = FALSE,
 values}
 
 \item{threshold}{is a numeric value in [0,1] specifying the proportion of 
-cells in \code{transformed} that should be recognised as correctly coerced 
+cells in \code{transformed} that should be recognized as correctly coerced 
 to accept the new class. 
 This does not effect the function output (except when \code{force = TRUE}) 
 but will have some diagnostic benefits.}
 
 \item{force}{Should a candidate vector (candidate according to 
-\code{threshold}) be forced to its suggested class (with non-coercable 
+\code{threshold}) be forced to its suggested class (with non-coercible 
 elements set to NA). 
 \code{FALSE} by default but if the function is called interactively, the 
 user will also have the option to set force = TRUE on the fly.}
@@ -29,7 +35,7 @@ user will also have the option to set force = TRUE on the fly.}
 data and specify if a column is a date or not,
 on the fly. This is \code{FALSE} by default for \code{as.Dates.default} but 
 \code{TRUE} for  
-\code{as.Dates.dataframe}. It only applies when the function is runned 
+\code{as.Dates.dataframe}. It only applies when the function is run 
 interactively and only when \code{force == FALSE}.}
 
 \item{var_name}{a name for the object to be used in messages (you could 

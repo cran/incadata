@@ -8,12 +8,12 @@
 #' @param transformed the transformed vector with NA-values for non transformed 
 #' values
 #' @param threshold is a numeric value in [0,1] specifying the proportion of 
-#' cells in \code{transformed} that should be recognised as correctly coerced 
+#' cells in \code{transformed} that should be recognized as correctly coerced 
 #' to accept the new class. 
 #' This does not effect the function output (except when \code{force = TRUE}) 
 #' but will have some diagnostic benefits.
 #' @param force Should a candidate vector (candidate according to 
-#' \code{threshold}) be forced to its suggested class (with non-coercable 
+#' \code{threshold}) be forced to its suggested class (with non-coercible 
 #' elements set to NA). 
 #' \code{FALSE} by default but if the function is called interactively, the 
 #' user will also have the option to set force = TRUE on the fly.
@@ -24,7 +24,7 @@
 #' data and specify if a column is a date or not,
 #' on the fly. This is \code{FALSE} by default for \code{as.Dates.default} but 
 #' \code{TRUE} for  
-#' \code{as.Dates.dataframe}. It only applies when the function is runned 
+#' \code{as.Dates.dataframe}. It only applies when the function is run 
 #' interactively and only when \code{force == FALSE}. 
 #' 
 #' @return Either \code{original} or \code{transformed}.

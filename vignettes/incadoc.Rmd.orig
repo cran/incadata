@@ -31,7 +31,7 @@ If working on a Mac, the same function is used to open the documents for immedia
 Assume we work on a lung cancer related project and therefore wants to download all register documentation for the Swedish lung cancer quality register.
 
 ```{r}
-suppressPackageStartupMessages(library(incadata))
+library(incadata)
 documents("lung")
 ```
 

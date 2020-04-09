@@ -11,9 +11,5 @@
 #'   variables
 #'   
 #' @examples 
-#' # Inspect the data
-#' dplyr::glimpse(ex_data)
-#' 
-#' # Coerce to incadata
 #' as.incadata(ex_data)
 "ex_data"

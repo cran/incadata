@@ -4,9 +4,11 @@
 \name{ex_data}
 \alias{ex_data}
 \title{Synthetic example data from INCA}
-\format{A data frame (not an object of class \code{incadata} 
+\format{
+A data frame (not an object of class \code{incadata} 
 with 497 rows and 433
-  variables}
+  variables
+}
 \usage{
 ex_data
 }
@@ -19,10 +21,6 @@ All data is random! There is no logical relation between any
 variables, not even between \code{x_Beskrivning} and \code{x_Varde}!
 }
 \examples{
-# Inspect the data
-dplyr::glimpse(ex_data)
-
-# Coerce to incadata
 as.incadata(ex_data)
 }
 \keyword{datasets}

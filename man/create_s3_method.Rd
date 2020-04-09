@@ -26,7 +26,7 @@ attributes (such as class).
 \code{create_s3_print} creates a print method.
 }
 \details{
-Don't forget to also create for example a data.frame method by
+Don't forget to also create for example a data.frame method by 
 
 \code{as.data.frame.xxx <- as.data.frame.vector}
 }

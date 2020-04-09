@@ -2,7 +2,7 @@ Package: incadata
 Type: Package
 Title: Recognize and Handle Data in Formats Used by Swedish Cancer
         Centers
-Version: 0.8.2
+Version: 0.9.1
 Authors@R: 
   c(
     person("Erik", "Bulow", email = "erik.bulow@rccvast.se",
@@ -33,18 +33,18 @@ Description:
   From version 0.7, some general help functions are also included, 
   as previously found in the 'rccmisc' package.
 License: GPL-2
-Depends: R (>= 2.10)
-Imports: backports, decoder, dplyr, rvest, sweidnumbr, xml2
+Depends: R (>= 2.10), decoder
+Imports: rvest, sweidnumbr, xml2
 Suggests: testthat, knitr, rmarkdown, R.rsp
 VignetteBuilder: R.rsp
 URL: https://cancercentrum.bitbucket.io/incadata
 BugReports: https://www.bitbucket.org/cancercentrum/incadata/issues
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-05-05 20:07:34 UTC; erikbulow
+Packaged: 2020-04-09 08:09:13 UTC; erik_
 Author: Erik Bulow [aut, cre] (<https://orcid.org/0000-0002-9973-456X>)
 Maintainer: Erik Bulow <erik.bulow@rccvast.se>
 Repository: CRAN
-Date/Publication: 2019-05-05 20:30:04 UTC
+Date/Publication: 2020-04-09 08:20:02 UTC

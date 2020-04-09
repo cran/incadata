@@ -1,11 +1,8 @@
 context("id")
 
-df <- 
-  ex_data %>% 
-  dplyr::mutate(
-    pnr = PAT_ID,
-    Persnr = 1
-  )
+df <- ex_data
+df$pnr <- df$PAT_ID
+df$Persnr <- 1
 
 ids <- 
   data.frame(

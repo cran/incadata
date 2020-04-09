@@ -20,7 +20,8 @@ Not only are some formats strange (such as Boolean and dates), sometimes the for
 This vignette will use some example data `ex_data` found in the package:
 
 ```{r}
-suppressPackageStartupMessages(library(incadata))
+library(dplyr)
+library(incadata)
 dim(ex_data)
 ```
 

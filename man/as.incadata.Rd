@@ -12,8 +12,7 @@ as.incadata(x, ...)
 
 is.incadata(x)
 
-\method{as.incadata}{data.frame}(x, decode = TRUE, id = TRUE,
-  ask = TRUE, ...)
+\method{as.incadata}{data.frame}(x, decode = TRUE, id = TRUE, ask = TRUE, ...)
 
 \method{as.incadata}{default}(x, n_i = NULL, ...)
 }

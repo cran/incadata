@@ -1,3 +1,7 @@
+# We import shole decoder package since 
+# we need access to keyvalue objects by name
+
+#' @import decoder
 #' @export
 #' @rdname as.incadata
 as.incadata.data.frame <- 
@@ -33,12 +37,11 @@ as.incadata.data.frame <-
   }
   
   if (decode) {
-    x <- decoder::decode(x)
+    x <- decode(x)
   }
   if (id) {
     x$id <- id(x)
   }
   
-  x <- dplyr::as.tbl(x)
   structure(x, class  = unique(c("incadata", class(x))))
 }

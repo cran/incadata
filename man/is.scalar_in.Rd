@@ -10,7 +10,7 @@ is.scalar_in(left, right)
 is.scalar_in01(x)
 }
 \arguments{
-\item{left, right}{arguments passed to \code{\link[dplyr]{between}}}
+\item{left, right}{lower and upper bound}
 
 \item{x}{R object to be tested, most likely a numeric vector of length one 
 (other formats are allowed but will always return \code{FALSE}).}

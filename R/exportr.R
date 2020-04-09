@@ -2,7 +2,7 @@
 #'
 #' If a package is not installed on the computer/server intended to run a
 #' final script, this function can take the script and export it together with all
-#' objects (functions, methods etcetera) from specified R packages. It might
+#' objects (functions, methods et cetera) from specified R packages. It might
 #' thereafter be possible to transfer the script and to run it even if all
 #' packages are not installed by the host. 
 #' 

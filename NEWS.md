@@ -1,3 +1,10 @@
+
+# incadata 0.9.1
+
+* Simplified dependencies: removed backport and dplyr.
+* Depends on decoder due to new version of that package.
+* Removed code of conduct. Don't think it adds anything valuable for the moment.
+
 # incadata 0.8.1
 
 * Removed non-ASCII encoding from example data.

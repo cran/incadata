@@ -20,10 +20,10 @@ The function `as.Dates` (plural) is intended to replace the ordinary `as.Date` (
 
 ## Missing dates
 
-RCC dates are usually in the form `%Y-%m-%d`, such as `r Sys.Date()`. These are recognised by ordinary R-functions such as `as.Date` if there are no missing values or if missing values are coded as `NA`. It is however common for RCC that missing dates are coded as empty strings:
+RCC dates are usually in the form `%Y-%m-%d`, such as `r Sys.Date()`. These are recognized by ordinary R-functions such as `as.Date` if there are no missing values or if missing values are coded as `NA`. It is however common for RCC that missing dates are coded as empty strings:
 
 ```{r, error = TRUE, purl = FALSE}
-suppressPackageStartupMessages(library(incadata))
+library(incadata)
 
 d <- c("", "2016-06-17")
 as.Date(d)
@@ -39,7 +39,7 @@ as.Dates(d)
 
 ## Missing day and/or month
 
-Date from old Rockan registers can also have missing days and months (coded as "00"). `as.Dates` will recognise these dates and will replace "00" by an approximate date:
+Date from old Rockan registers can also have missing days and months (coded as "00"). `as.Dates` will recognize these dates and will replace "00" by an approximate date:
 
 ```{r, error = TRUE, purl = FALSE}
 as.Date("2000-01-00")  # as.Date fails!

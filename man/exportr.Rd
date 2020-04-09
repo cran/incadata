@@ -4,8 +4,13 @@
 \alias{exportr}
 \title{Dump script together with functions from required packages}
 \usage{
-exportr(script = NULL, packages, recursive = TRUE,
-  outfile = "./generated_r_script.R", force = FALSE)
+exportr(
+  script = NULL,
+  packages,
+  recursive = TRUE,
+  outfile = "./generated_r_script.R",
+  force = FALSE
+)
 }
 \arguments{
 \item{script}{connection with script (file) to append to function definitions}
@@ -25,7 +30,7 @@ nothing (function called for its side effects)
 \description{
 If a package is not installed on the computer/server intended to run a
 final script, this function can take the script and export it together with all
-objects (functions, methods etcetera) from specified R packages. It might
+objects (functions, methods et cetera) from specified R packages. It might
 thereafter be possible to transfer the script and to run it even if all
 packages are not installed by the host.
 }
